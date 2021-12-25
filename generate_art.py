@@ -121,12 +121,12 @@ if __name__ == "__main__":
         size: int = args.size
         minimum: int = int(size * args.margin)
         maximum: int = size - minimum
-        point_generator: PointGeneratorInterface = RandPointGenerator(minimum, maximum)
-        #  point_generator: PointGeneratorInterface = LovePointGenerator(
-        #      minimum=minimum,
-        #      maximum=maximum,
-        #      n=args.num_lines,
-        #  )
+        #  point_generator: PointGeneratorInterface = RandPointGenerator(minimum, maximum)
+        point_generator: PointGeneratorInterface = LovePointGenerator(
+            minimum=minimum,
+            maximum=maximum,
+            n=args.num_lines,
+        )
         print(f"{i + 1}/{args.count}")
         generate_art(
             collection=args.collection,
