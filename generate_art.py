@@ -3,6 +3,14 @@
 """generate_art.py
 
 Based off of pixegami/python-generative-art-tutorial on GitHub.
+
+Args:
+    --collection (str): Name of folder containing the generated images.
+    --count (int): How many images to generate.
+    --size (int): Square size of images (in pixels).
+    --scale_factor (int): How big to make the scaled-up version (for antialiasing).
+    --margin (float): How much space to leave blank around the image.
+    --num (int): How many points to generate.
 """
 
 
@@ -26,7 +34,7 @@ def generate_art(
     name: str,
     target_size: int,
     scale_factor: int,
-    num_lines: int,
+    num: int,
     point_generator: PointGeneratorInterface,
 ) -> None:
     """Generates and saves the art piece(s).
@@ -36,7 +44,7 @@ def generate_art(
         name (str): Name of the image, without the file extension.
         target_size (int): Size of the image.
         scale_factor (int): Scaling for antialiasing.
-        num_lines (int): Number of lines to draw.
+        num (int): Number of points to generate.
         point_generator (PointGeneratorInterface): Used to generate points.
     """
 
@@ -57,7 +65,7 @@ def generate_art(
     end_color: tuple[int, int, int] = rand_color()
 
     # Generate the points
-    points: list[Point] = [point_generator.generate() for _ in range(num_lines)]
+    points: list[Point] = [point_generator.generate() for _ in range(num)]
 
     # Draw bounding box
     min_x: int = points[0].x
@@ -129,6 +137,6 @@ if __name__ == "__main__":
             name=f"{args.collection}_img_{i}",
             target_size=args.size,
             scale_factor=args.scale_factor,
-            num_lines=args.num_lines,
+            num=args.num,
             point_generator=point_generator,
         )

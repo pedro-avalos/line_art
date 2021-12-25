@@ -57,7 +57,7 @@ class LovePointGenerator(PointGeneratorInterface):
         self.minimum: int = int(args.size * args.margin)
         self.maximum: int = args.size - self.minimum
         self.t: float = 0
-        self.step: float = (2 * math.pi) / args.num_lines
+        self.step: float = (2 * math.pi) / args.num
 
     def generate(self) -> Point:
         i: float = self.t

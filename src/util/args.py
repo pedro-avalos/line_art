@@ -47,9 +47,9 @@ def parse_args() -> argparse.Namespace:
         default=0.1,
     )
     parser.add_argument(
-        "--num_lines",
+        "--num",
         type=int,
-        help="how many lines to draw",
+        help="how many points to generate",
         required=False,
         default=10,
     )
