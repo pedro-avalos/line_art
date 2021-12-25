@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import abc
+import argparse
 import math
 import random
 
@@ -29,14 +30,10 @@ class RandPointGenerator(PointGeneratorInterface):
         maximum (int): Maximum value for x or y in the point.
     """
 
-    def __init__(
-        self,
-        minimum: int,
-        maximum: int,
-    ) -> None:
+    def __init__(self, args: argparse.Namespace) -> None:
         super().__init__()
-        self.minimum: int = minimum
-        self.maximum: int = maximum
+        self.minimum: int = int(args.size * args.scale_factor * args.margin)
+        self.maximum: int = int(args.size * args.scale_factor - self.minimum)
 
     def generate(self) -> Point:
         return Point(
@@ -55,12 +52,12 @@ class LovePointGenerator(PointGeneratorInterface):
         step (float): What to increase t by each generation.
     """
 
-    def __init__(self, minimum: int, maximum: int, n: int) -> None:
+    def __init__(self, args: argparse.Namespace) -> None:
         super().__init__()
-        self.minimum: int = minimum
-        self.maximum: int = maximum
+        self.minimum: int = int(args.size * args.margin)
+        self.maximum: int = args.size - self.minimum
         self.t: float = 0
-        self.step: float = (2 * math.pi) / n
+        self.step: float = (2 * math.pi) / args.num_lines
 
     def generate(self) -> Point:
         i: float = self.t
