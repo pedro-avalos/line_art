@@ -5,7 +5,7 @@ import random
 
 
 def rand_color() -> tuple[int, int, int]:
-    """Generates a random color.
+    """Generates a random, bright color.
 
     Returns:
         tuple[int, int, int]: Random RGB color (values range 0-255).

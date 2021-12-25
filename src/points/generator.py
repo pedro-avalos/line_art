@@ -11,7 +11,7 @@ class PointGeneratorInterface(metaclass=abc.ABCMeta):
     """Class to represent any generator of points."""
 
     @classmethod
-    def __subclasshook__(cls, subclass):
+    def __subclasshook__(cls, subclass) -> bool:
         return hasattr(subclass, "generate") and callable(subclass.generate)
 
     @abc.abstractmethod
@@ -34,7 +34,6 @@ class RandPointGenerator(PointGeneratorInterface):
         minimum: int,
         maximum: int,
     ) -> None:
-
         super().__init__()
         self.minimum: int = minimum
         self.maximum: int = maximum
@@ -68,9 +67,11 @@ class LovePointGenerator(PointGeneratorInterface):
         self.t += self.step
         return Point(
             self.maximum - int(self.maximum * pow(math.sin(i), 3)),
-            self.maximum - int(
-                ((0.8 * random.random() * self.maximum) * math.cos(i))
-                - ((0.6 * random.random() * self.maximum) * math.cos(2 * i))
-                - ((0.2 * random.random() * self.maximum) * math.cos(3 * i))
-                - ((0.1 * random.random() * self.maximum) * math.cos(4 * i)))
+            self.maximum
+            - int(
+                (0.8 * random.random() * self.maximum * math.cos(i))
+                - (0.6 * random.random() * self.maximum * math.cos(2 * i))
+                - (0.2 * random.random() * self.maximum * math.cos(3 * i))
+                - (0.1 * random.random() * self.maximum * math.cos(4 * i))
+            ),
         )
