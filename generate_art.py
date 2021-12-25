@@ -6,11 +6,27 @@ Based off of pixegami/python-generative-art-tutorial on GitHub.
 
 Args:
     --collection (str): Name of folder containing the generated images.
+        Default: 'collection'
     --count (int): How many images to generate.
+        Default: 10
     --size (int): Square size of images (in pixels).
+        Default: 720
     --scale_factor (int): How big to make the scaled-up version (for antialiasing).
+        Default: 2
     --margin (float): How much space to leave blank around the image.
-    --num (int): How many points to generate.
+        Default: 0.1
+    --num_points (int): How many points to generate.
+        Default: 10
+
+Examples:
+
+    Default arguments:
+
+        $ ./generate_art.py
+
+    Generate 25 images in a collection named foo:
+
+        $ ./generate_art.py --collection=foo --count=25
 """
 
 
@@ -34,7 +50,7 @@ def generate_art(
     name: str,
     target_size: int,
     scale_factor: int,
-    num: int,
+    num_points: int,
     point_generator: PointGeneratorInterface,
 ) -> None:
     """Generates and saves the art piece(s).
@@ -44,7 +60,7 @@ def generate_art(
         name (str): Name of the image, without the file extension.
         target_size (int): Size of the image.
         scale_factor (int): Scaling for antialiasing.
-        num (int): Number of points to generate.
+        num_points (int): Number of points to generate.
         point_generator (PointGeneratorInterface): Used to generate points.
     """
 
@@ -65,7 +81,7 @@ def generate_art(
     end_color: tuple[int, int, int] = rand_color()
 
     # Generate the points
-    points: list[Point] = [point_generator.generate() for _ in range(num)]
+    points: list[Point] = [point_generator.generate() for _ in range(num_points)]
 
     # Draw bounding box
     min_x: int = points[0].x
@@ -137,6 +153,6 @@ if __name__ == "__main__":
             name=f"{args.collection}_img_{i}",
             target_size=args.size,
             scale_factor=args.scale_factor,
-            num=args.num,
+            num_points=args.num_points,
             point_generator=point_generator,
         )

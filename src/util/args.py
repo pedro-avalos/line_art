@@ -47,7 +47,7 @@ def parse_args() -> argparse.Namespace:
         default=0.1,
     )
     parser.add_argument(
-        "--num",
+        "--num_points",
         type=int,
         help="how many points to generate",
         required=False,
