@@ -142,12 +142,9 @@ if __name__ == "__main__":
     args: argparse.Namespace = parse_args()
 
     for i in range(args.count):
-        size: int = args.size
-        minimum: int = int(size * args.margin)
-        maximum: int = size - minimum
         point_generator: PointGeneratorInterface = RandPointGenerator(args)
         #  point_generator: PointGeneratorInterface = LovePointGenerator(args)
-        print(f"{i + 1}/{args.count}")
+        print(f"Generating image... ({i + 1}/{args.count})")
         generate_art(
             collection=args.collection,
             name=f"{args.collection}_img_{i}",
